@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004194032) do
+ActiveRecord::Schema.define(version: 20171004203017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,16 @@ ActiveRecord::Schema.define(version: 20171004194032) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "skills", force: :cascade do |t|#SchemaDumper uses force: :cascade on create_table. This makes it possible to reload a schema when foreign keys are in place. ?? Needs clarification
-    #why does it create "skills" when the Skill was used with model generator?
+  create_table "portfolios", force: :cascade do |t|
+    t.string "title"
+    t.string "subtitle"
+    t.text "body"
+    t.text "main_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
     t.string "title"
     t.integer "percent_utilized"
     t.datetime "created_at", null: false

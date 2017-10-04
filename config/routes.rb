@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :portfolios
   # names are connected to the pages_controller file and veiws files
   get 'pages/home'
 
