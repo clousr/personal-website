@@ -289,6 +289,10 @@ Portfolio.find(params[:id])
 
 Need to implement an update method within the controller
 
+5.49 creating a link
+in veiws/portfolio
+
+
 
 
 
