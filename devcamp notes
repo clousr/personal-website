@@ -285,6 +285,23 @@ def edit
     @portfolio_item = Portfolio.find(params[:id])
 end
 
+updated main images via code below
+ => "http://via.placeholder.com/0x400" 
+2.4.1 :023 > Portfolio.length.times do |i|
+2.4.1 :024 >     if !Portfolio.find(i + 1).nil?
+2.4.1 :025?>     Portfolio.find(i+1).update_attributes(:main_image => 'http://via.placeholder.com/600x400')
+2.4.1 :026?>     end
+2.4.1 :027?>   end
+
+
+.destroy or .delete method
+delete does not care about validations or callbacks?
+destroy does not delete if there are items dependent on the call, normally the better option
+
+
+
+
+
 Portfolio.find(params[:id])
 
 Need to implement an update method within the controller
@@ -294,6 +311,9 @@ in veiws/portfolio
 
 5.50 building a show link
 edit index files and add show.html.erb
+
+5.51 implementing the delete action
+
 
 
 
