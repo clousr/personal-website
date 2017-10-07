@@ -10,7 +10,7 @@ class PortfoliosController < ApplicationController
     @portfolio_items = Portfolio.all
   end
 
-  def new
+  def new# this must have a corresponding veiws file to call from
     @portfolio_item = Portfolio.new
   end
 
@@ -19,9 +19,26 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio_item.save
-        format.html { redirect_to Portfolio.new, notice: 'Portfolio was successfully created.' }
+        format.html { redirect_to portfolios_path, notice: 'Portfolio was successfully created.' }
       else
         format.html { render :new }
+      end
+    end
+  end
+
+  def edit
+    @portfolio_item = Portfolio.find(params[:id])
+
+  end
+
+  def update
+    @portfolio_item = Portfolio.find(params[:id])
+
+    respond_to do |format|
+      if @portfolio_item.update(params.require(:portfolio).permit(:title, :subtitle, :body))
+        format.html { redirect_to portfolios_path, notice: 'Blog was successfully updated.' }
+      else
+        format.html { render :edit }
       end
     end
   end

@@ -279,6 +279,22 @@ New only renders/instanciates the item, does not create it
 Error no show function
 fix: under portfolio controllers the redirect to portion. Change @portfolio item to portfolio paths. You can find this underneath reake route prefixes? portfolios_path to Portfolio.new
 
+5.48 implement editing database records
+copied all from new.html.erb from the views/portfolio folder and changed
+def edit
+    @portfolio_item = Portfolio.find(params[:id])
+end
+
+Portfolio.find(params[:id])
+
+Need to implement an update method within the controller
+
+
+
+
+
+
+
 
 
 
