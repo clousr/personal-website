@@ -292,6 +292,9 @@ Need to implement an update method within the controller
 5.49 creating a link
 in veiws/portfolio
 
+5.50 building a show link
+edit index files and add show.html.erb
+
 
 
 
