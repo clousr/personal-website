@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :portfolios
+  resources :portfolios, except: [:show]
+  get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'#chnages the route to portfolio/:id instead of portfolios/:id. must also change the proper index file
+
+
   # names are connected to the pages_controller file and veiws files
   
 

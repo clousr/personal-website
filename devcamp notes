@@ -285,6 +285,17 @@ def edit
     @portfolio_item = Portfolio.find(params[:id])
 end
 
+Portfolio.find(params[:id])
+
+Need to implement an update method within the controller
+
+5.49 creating a link
+in veiws/portfolio
+
+5.50 building a show link
+edit index files and add show.html.erb
+
+5.51 implementing the delete action
 updated main images via code below
  => "http://via.placeholder.com/0x400" 
 2.4.1 :023 > Portfolio.length.times do |i|
@@ -298,34 +309,8 @@ updated main images via code below
 delete does not care about validations or callbacks?
 destroy does not delete if there are items dependent on the call, normally the better option
 
+5.52 custom routes
+#must restart rails server everytime you make a change to the routes file
 
-
-
-
-Portfolio.find(params[:id])
-
-Need to implement an update method within the controller
-
-5.49 creating a link
-in veiws/portfolio
-
-5.50 building a show link
-edit index files and add show.html.erb
-
-5.51 implementing the delete action
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+5.53 custom routes for resources
+updated routes file and veiw file so that the show action path will say portfolio/:id instead of portfolios/:id
