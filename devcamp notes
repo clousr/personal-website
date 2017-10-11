@@ -304,6 +304,8 @@ updated main images via code below
 2.4.1 :026?>     end
 2.4.1 :027?>   end
 
+### from later tutorial .find_each method would also work
+
 
 .destroy or .delete method
 delete does not care about validations or callbacks?
@@ -314,3 +316,36 @@ destroy does not delete if there are items dependent on the call, normally the b
 
 5.53 custom routes for resources
 updated routes file and veiw file so that the show action path will say portfolio/:id instead of portfolios/:id
+
+5.54-55 implementing permalinks
+friendly id genfile
+modified its migration file following github documentation
+friendly id has an initializer file with reserved words, not exactly sure how they work
+rails:db migrate updates schema file
+deviated from devcamp and followed documentation, edited users controller
+*return to this as I don't think it generated the files
+* we are not using the user model as stated in the doc, we will be appying this to our blog.rb???
+***   extend FriendlyId
+***   friendly_id :title, use: :slugged
+
+Editing with migration generator
+rails g migration add_slug_to_blogs slug:string:uniq
+
+
+rails c
+Blog.create!(title: "My great title", body:"sadkfjal")
+
+
+added friendly id functionality from docs to blogs controller instead of users controller
+def set_blog
+@blog = Blog.find(params[:id]) >> @blog = Blog.friendly.find(params[:id])
+
+rails c
+Blog.find_each(&:save)
+**&:   means proc as a method argument
+
+
+
+
+
+
