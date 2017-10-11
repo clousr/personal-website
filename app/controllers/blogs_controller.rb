@@ -17,6 +17,12 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
+  def toggle_status
+    if Blog.friendly.find(params[:id]).published? ? Blog.friendly.find(params[:id]).draft! : Blog.friendly.find(params[:id]).published!
+    end
+    redirect_to blogs_url
+  end
+
   # GET /blogs/1/edit
   def edit
   end
