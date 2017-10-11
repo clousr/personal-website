@@ -345,6 +345,25 @@ Blog.find_each(&:save)
 **&:   means proc as a method argument
 
 
+5.56 Enums in Rails to manage data stages
+adding a status
+rails g migration add_post_status_to_blogs status:integer
+change to generated migration file default: 0
+put an enum in blog.rb
+enum status: {draft: 0, published: 1}
+
+*problem arose from not saving migration default vaule before applying, created new migration file and added remove_column :blogs, :status
+
+Blog.last.published!
+Blog.published.count
+
+
+
+
+
+
+
+
 
 
 
