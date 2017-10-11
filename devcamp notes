@@ -1,0 +1,410 @@
+SECTION 2.20
+
+rails new "file name" -T --database=postgresql
+-T (rails does not install test framework)
+***To do: Integrating postman testing framework
+
+rails s
+(starts rails server)
+
+rails db:create
+(creates database?)
+
+rails db:migrate
+(unknown??)
+
+Generators and the Scaffold gereator
+rails g scaffold Blog title:string body:text
+(g(generator) scaffold(rails generator) Blog(feature) string=156 charachters text=inf)
+
+within sublime the db migrate folder has a file with the scaffolded items
+
+rails db:migrate
+(unsure as to why I migrated again)
+
+within sublime there will be db/schema, do not touch unless dire circumstances, check this file into version control
+
+routes file under config?
+---resources Blogs (gives us our route)
+
+
+section 2.21
+app/assets/config
+--- 
+
+app/assests/javascript/blogs.coffee
+----superscript of javascript
+
+app/assests/Stylesheets
+-css & scss files
+-scaffolds file - using this instead of regular HTML
+
+channels
+--putting live data into the program/action cable
+
+controllers
+--communicate between model, view, and routing systems
+--runs def index action when visiting localhost:3000/blogs
+---   .limit(#) will limit the number shown
+
+--def show
+--- 
+
+before _action :setblog,only [:def1, :def1]
+--- will call the set blog method when calling :def1 and :def2
+
+@blog????
+
+
+blogs_controller
+
+--def_new
+---blog.new
+---creates the form
+
+--def create
+--- creates a new blog
+---blog.new(blog_params)
+--- sends paramaeters to 
+---json files are not usful right now
+----used in api development
+--- blog_path(@blog)<---- same as @blog
+
+
+Views/blog
+-- carries a lot of the same files as blogs_controller
+--in html.erb
+
+
+section 2.23
+rake routes
+--
+
+resources
+-populates all of the popular routes
+-restful routing
+
+What is a URI Pattern
+-- :id 
+
+section 2.24
+convention over ????
+
+enviroments
+
+section 2.26-27
+rails h (help menu)
+rails -m (to use a template, good for config files and authorization)
+
+gem divise(for authentication)
+
+--skip_keeps ()
+git hub automatically deletes empty folders .keep file will prevent this
+
+puma is a new webserver
+rails sproket, spring, listen, turbolinks, angular?
+
+unit testing, tdd,
+
+API mode
+
+case variable[:variable]
+when variable   then variable
+
+
+What is an instance method?
+instanciates inderatcts with model
+
+section 3.31
+git init
+git add (optional --all if first run, can also commit individual files)
+git commit -m 'initial commit'
+git push
+
+section 3.32
+.gitignore files
+--hides secrets file and other things you do not want public
+-- add line to .gitignore /config/secrets.yml
+
+git checkout config/secrets.yml
+-- will return your code back to last commit
+
+git rm . -r --cache 
+-MOST IMPORTANT LINE OF CODE IN YOUR REPITIORE
+-removes ths cache
+-allows for you to change the git status when you change gitignore, will allow the appropriate changes
+
+section 3.33
+readme.md
+.md means markdown
+learn markdown tutorial
+daring fireball
+leanpub
+
+H1 tag - # (will create a large bold title)
+Block Quote - > (will create 'indentation' into page)
+H3 tags - ###( will create a smaller bold title)
+bullet points - -
+code snipets- ```codetype(eg ruby/javascript) return "code" return```
+
+section 4.38-39 rails controller and building pages
+git branch
+git checkout - b branchname ## replace branchname
+rails g controller pages ## created pages_controller.rb , pages.coffee, pages.scss, pages_helper.rb, routes.rb #(under config near locales, puma, secrets etc ), veiw files##
+
+MVC## Model - Veiw - Controller
+
+routes.rb and specified controllers # names are connected to the pages_controller file and veiws files
+
+"raise" will throw an error
+put instance variable @posts = Blog.all # class variable @posts = Blog.all method or variable
+## Blog.all is the model
+
+##pushing to a git branch
+git push origin branchname
+
+compare and pull request on github to checks to see if able to merge with master branch and pull down master
+
+
+section 4.40 Model Generator
+rails g model Skill title:string percent_utilized:integer 
+creates migration under db/migrate and  model.rb file under models/concerns
+
+rails db:migrate  #changes schema and creates empty tables
+
+rails c #rails console
+
+Skill.create!(title: "Rails", percent_utilized: 75)
+
+Skill.all # will do a databse call
+
+#checkout master after commit but before push
+git merge model-generator # do not do this if you are working with a team use the website tool
+
+rails g resource Portfolio title:string subtitle:string body:text main_image:text
+#images are strored as text bc it is stored as link to the image, string is only limited to 156 chars
+#added thumb_image at a later date  by altering the schema file??- that solved the seeds problem, but it caused errors. changed the specific migration file
+##ssecond attempt was to add adding -force to overwrite
+
+# invoke  active_record
+      create    db/migrate/20171004203017_create_portfolios.rb
+      create    app/models/portfolio.rb
+      invoke  controller
+      create    app/controllers/portfolios_controller.rb
+      invoke    erb
+      create      app/views/portfolios
+      invoke    helper
+      create      app/helpers/portfolios_helper.rb
+      invoke    assets
+      invoke      coffee
+      create        app/assets/javascripts/portfolios.coffee
+      invoke      scss
+      create        app/assets/stylesheets/portfolios.scss
+      invoke  resource_route
+       route    resources :portfolios
+#
+#portfolios_controller and views/portfolios are empty
+#resources scaffold is a scaled down scaffold generator
+
+
+4.42-44  Rails generators deep dive
+rails new GeneratorApp -T --database=postgresql
+change into dir
+rails db:create #still unsure what this does, but creates db files
+rails g scaffold Post title:string body:text
+rails db:migrate #still unsure what this does
+creates scaffolds stylesheets which suck (app/assets/stylesheets)
+config/application.rb # hash out config.load_defaults 5.1, add your defaults here:
+#common are from http://guides.rubyonrails.org/generators.html
+config.generators do |g|
+      g.orm             :active_record#standard database
+      g.template_engine :erb#could use slim or haml(yml?)
+      g.test_framework  :test_unit, fixture: false#changed to false #testunit could be changed to rspec/maybe postman idk
+      g.stylesheets     false#added to match, do not create stylesheets
+      g.javascripts     false#added to match, do not create
+end
+#different in GeneratorApp to match guide
+
+rails g scaffold Blog title:string
+rails db:migrate
+
+#To also customize what gets generated
+## create /lib/templates/erb/scaffold/index.html.erb #would be called something else if we are not using erb
+
+#this is where you can pull the software from the rails documentation
+https://github.com/rails/rails/tree/master/railties/lib/rails/generators/erb/scaffold/templates
+
+to alter the generators(for scaffolds, resources, etc) alter the config/application.rb application
+
+all of these changes will not be retroactive, would only be for anything you post changes
+
+rails g scaffold Category title:string desription:text
+
+there are guides on google to show you how to create your own generators
+
+
+
+4.45 building a seeds flie
+rails c
+Blog.create!(title: 'asdf', body: ' afsasf')
+
+can write ruby code in seeds.rb file, unsure as to when this will run
+
+placeholder.com is a great place for image files
+
+rails db:setup 
+#going to do everything on scratch, never run on production and only locally, nuclear option
+
+git push origin portfolio-feature #?????
+
+4.46 implementing a index action from scratch
+#work is being done in portfolios controller
+must create an index.html.erb file in the views section, reference documentation there for what must be inside
+
+
+
+4.47 the New and create function
+rake routes
+rake routes | grep portfolio
+
+altering the portfolio controller file
+create a new file in views/portfolio (our resources function we are currently building out)
+you need a veiws file for every page that you will have
+copied from _form.html.erb under the blogs section that was built by the scaffold system and removed the error section, left the do end structure behind
+changed the blog to @portfolio, still unsure of where the @portfolio variable was created
+Did not create error that he was stating, but we need to be able to provide the controller with the correct data
+He stated to correct this you need to add to the "new" function the @portfolio_item = Portfolio.new(not portfolio_items)
+New only renders/instanciates the item, does not create it
+
+Error no show function
+fix: under portfolio controllers the redirect to portion. Change @portfolio item to portfolio paths. You can find this underneath reake route prefixes? portfolios_path to Portfolio.new
+
+5.48 implement editing database records
+copied all from new.html.erb from the views/portfolio folder and changed
+def edit
+    @portfolio_item = Portfolio.find(params[:id])
+end
+
+Portfolio.find(params[:id])
+
+Need to implement an update method within the controller
+
+5.49 creating a link
+in veiws/portfolio
+
+5.50 building a show link
+edit index files and add show.html.erb
+
+5.51 implementing the delete action
+updated main images via code below
+ => "http://via.placeholder.com/0x400" 
+2.4.1 :023 > Portfolio.length.times do |i|
+2.4.1 :024 >     if !Portfolio.find(i + 1).nil?
+2.4.1 :025?>     Portfolio.find(i+1).update_attributes(:main_image => 'http://via.placeholder.com/600x400')
+2.4.1 :026?>     end
+2.4.1 :027?>   end
+
+### from later tutorial .find_each method would also work
+
+
+.destroy or .delete method
+delete does not care about validations or callbacks?
+destroy does not delete if there are items dependent on the call, normally the better option
+
+5.52 custom routes
+#must restart rails server everytime you make a change to the routes file
+
+5.53 custom routes for resources
+updated routes file and veiw file so that the show action path will say portfolio/:id instead of portfolios/:id
+
+5.54-55 implementing permalinks
+friendly id genfile
+modified its migration file following github documentation
+friendly id has an initializer file with reserved words, not exactly sure how they work
+rails:db migrate updates schema file
+deviated from devcamp and followed documentation, edited users controller
+*return to this as I don't think it generated the files
+* we are not using the user model as stated in the doc, we will be appying this to our blog.rb???
+***   extend FriendlyId
+***   friendly_id :title, use: :slugged
+
+Editing with migration generator
+rails g migration add_slug_to_blogs slug:string:uniq
+
+
+rails c
+Blog.create!(title: "My great title", body:"sadkfjal")
+
+
+added friendly id functionality from docs to blogs controller instead of users controller
+def set_blog
+@blog = Blog.find(params[:id]) >> @blog = Blog.friendly.find(params[:id])
+
+rails c
+Blog.find_each(&:save)
+**&:   means proc as a method argument
+
+
+5.56 Enums in Rails to manage data stages
+adding a status
+rails g migration add_post_status_to_blogs status:integer
+change to generated migration file default: 0
+put an enum in blog.rb
+enum status: {draft: 0, published: 1}
+
+*problem arose from not saving migration default vaule before applying, created new migration file and added remove_column :blogs, :status
+
+Blog.last.published!
+Blog.last.published?
+Blog.published.count
+
+
+5.57-58 implement in custom action(toggle)
+index.html.erb
+<th colspan="3"></th> to <th colspan="4"></th>
+added link_to blog.status, toggle_status_blog_path(blog)        (draft?) grabbed after updating resources
+added <th>Status</th>
+
+open routes.rb
+under resources 
+resources :blog do
+   member do
+      get :toggle_status >>>changed from a post request to a get
+   end
+end
+
+rake routes
+will find new route
+
+edit blog controller for toggle status action
+needed to pass in blog/:id to the veiws file
+
+added 
+def toggle_status to blogs_controller.rb
+byebug## stops your system and asks question
+redirect_to blogs_url
+
+when hitting draft link, byebug opens in server, same as console
+type in params when requested
+blog = Blog.friendly.find(params[:id])
+blog = blog.published!
+exit
+
+implemented ternary operator and deviated from tutorial
+
+added to toggle_status
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
