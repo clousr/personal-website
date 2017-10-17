@@ -394,7 +394,6 @@ implemented ternary operator and deviated from tutorial
 
 added to toggle_status
 
-<<<<<<< HEAD
 5.59 updating project management
 merging the branch
 creating a new pull request
@@ -458,13 +457,27 @@ have to pass in @thing = params[:thing] in the controller method you point the q
 
 passed the <h1><%= @thing  %></h1> to the veiws file and it is now showing the :thing extension
 
+6.63 Data Validations
+after the pull request on github, we must update local stuff with git pull
+create a new repository
+git checkout -b data-feature
+
+created example of empty blog post in rails c
+called upcase method on the views file and it threw an error
+go to models to implement validation
+
+validates_presence_of :title, :body
+##will not let a blog post item to be created without a title and a body
+
+updated all the models files
 
 
 
 
 
-=======
->>>>>>> b682213d1c6711cad9adc89cbf884efa98e897bf
+
+
+
 
 
 
