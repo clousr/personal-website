@@ -394,6 +394,7 @@ implemented ternary operator and deviated from tutorial
 
 added to toggle_status
 
+<<<<<<< HEAD
 5.59 updating project management
 merging the branch
 creating a new pull request
@@ -462,6 +463,8 @@ passed the <h1><%= @thing  %></h1> to the veiws file and it is now showing the :
 
 
 
+=======
+>>>>>>> b682213d1c6711cad9adc89cbf884efa98e897bf
 
 
 

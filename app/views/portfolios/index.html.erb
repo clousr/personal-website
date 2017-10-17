@@ -1,0 +1,18 @@
+<h1>Portfolio Items</h1>
+<!-- <%#emebed ruby%> it is what the .erb is about -->
+<!-- where did the portfolios_items class variable(array) come from. Also something about an equals sign before the percent sign so that it can render the information on the page -->
+
+<!--<a href="portfolios/new" >Create New Item</a>-->
+
+<%= link_to "Create New Item", new_portfolio_path %>
+
+<p><%= new_portfolio_path %></p>
+
+<% @portfolio_items.each do |portfolio_item| %>
+  <p><%= link_to portfolio_item.title, portfolio_show_path(portfolio_item.id) %></p>
+  <p><%= portfolio_item.subtitle %></p>
+  <p><%= portfolio_item.body %></p>
+  <p><%= image_tag portfolio_item.thumb_image if !portfolio_item.thumb_image.nil? %></p>
+  <%= link_to "Edit",edit_portfolio_path(portfolio_item.id) %>
+  <%= link_to "Delete",portfolio_path(portfolio_item.id), method: :delete, data: { confirm: 'Are you sure?'} %>
+<%end%>

@@ -17,6 +17,12 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
+  def toggle_status
+    if Blog.friendly.find(params[:id]).published? ? Blog.friendly.find(params[:id]).draft! : Blog.friendly.find(params[:id]).published!
+    end
+    redirect_to blogs_url
+  end
+
   # GET /blogs/1/edit
   def edit
   end
@@ -64,7 +70,7 @@ class BlogsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
-      @blog = Blog.find(params[:id])
+      @blog = Blog.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
