@@ -471,6 +471,48 @@ validates_presence_of :title, :body
 
 updated all the models files
 
+6.64 data relationships in rails
+git symbolic-ref --short HEAD
+git checkout data-feature
+rails g model Topic title:string
+rails db:migrate
+validates_presence_of :title within the topic.rb model
+
+
+Example
+Blogs:
+title:Baseball wolrd series, topic_id: 1
+Superbowl, topic_id: 2
+Spring training, topic_id: 1
+
+Topics:
+1 baseball
+2 football
+
+######################################################
+
+rails g migration add_topic_referenece_to_blogs topic:references
+note in db migration file    foreign_key: true ===== not just a regiulatr integer value but it is referencing  another table
+
+addition to topic.rb 
+has_many :blogs
+
+addition to blogs.rb
+belongs_to :topic
+
+
+Topic.create!(title: "Ruby Programing")
+Topic.create!(title: "Software Engineering")
+
+Blog.create!(title: "Some cool ruby stuff", body: 'sadfgsadfsdf', topic_id: Topic.first.id)
+t = Topic.first
+
+
+
+
+
+
+
 
 
 
