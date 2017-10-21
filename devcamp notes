@@ -457,7 +457,7 @@ have to pass in @thing = params[:thing] in the controller method you point the q
 
 passed the <h1><%= @thing  %></h1> to the veiws file and it is now showing the :thing extension
 
-6.63 Data Validations
+6.64 Data Validations
 after the pull request on github, we must update local stuff with git pull
 create a new repository
 git checkout -b data-feature
@@ -471,7 +471,7 @@ validates_presence_of :title, :body
 
 updated all the models files
 
-6.64 data relationships in rails
+6.65 data relationships in rails
 git symbolic-ref --short HEAD
 git checkout data-feature
 rails g model Topic title:string
@@ -506,6 +506,50 @@ Topic.create!(title: "Software Engineering")
 
 Blog.create!(title: "Some cool ruby stuff", body: 'sadfgsadfsdf', topic_id: Topic.first.id)
 t = Topic.first
+
+t.blogs ###Active record association collection proxy
+Blog.last.topic
+
+
+6.66 custom scopes
+updating seeds file
+3.times do |topic|
+    Topic.create!(
+        title: "Topic #{topic}"
+        )
+end
+
+puts "3 Topics created"
+
+under body, lorem ipsum and after body created new object, topic_id: Topic.last.id
+
+rails db:setup
+Portfolio.first.subtitle
+Portfolio.where(subtitle: "Ruby on Rails")
+
+The lines at the beginning of a rails c query is sql  eg. SELECT  "portfolios".* FROM "portfolios" ORDER BY "portfolios"."id" DESC LIMIT $1
+
+example shown in the portfolio controller where he used the .where method to fitler index items
+
+
+
+****
+under portfolio model
+def self.angular
+    where(subtitle: 'Angular')
+  end
+
+example shown for index file with Portfolio.angular
+
+***
+scope keyword, uses a lambda
+scope :ruby_on_rails_portfolio_items, -> { where(subtitle: 'Ruby on Rails')}
+
+example shown for index file with Portfolio.ruby_on_rails_portfolio_items
+
+
+
+
 
 
 

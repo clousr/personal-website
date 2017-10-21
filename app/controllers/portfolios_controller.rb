@@ -10,6 +10,10 @@ class PortfoliosController < ApplicationController
     @portfolio_items = Portfolio.all
   end
 
+  def angular
+    @angular_portfolio_items = Portfolio.angular
+  end
+
   def new# this must have a corresponding veiws file to call from
     @portfolio_item = Portfolio.new
   end
