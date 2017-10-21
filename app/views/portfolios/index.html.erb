@@ -6,7 +6,6 @@
 
 <%= link_to "Create New Item", new_portfolio_path %>
 
-<p><%= new_portfolio_path %></p>
 
 <% @portfolio_items.each do |portfolio_item| %>
   <p><%= link_to portfolio_item.title, portfolio_show_path(portfolio_item.id) %></p>

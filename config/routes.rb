@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :portfolios, except: [:show]
-  get 'angular-items', to: portfolio_angular
+
+  get 'angular-items', to: 'portfolios#angular'
 
   get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'#chnages the route to portfolio/:id instead of portfolios/:id. must also change the proper index file
 
