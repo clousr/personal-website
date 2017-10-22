@@ -10,12 +10,17 @@ class PortfoliosController < ApplicationController
     @portfolio_items = Portfolio.all
   end
 
+  def angular
+    @angular_portfolio_items = Portfolio.angular
+  end
+
   def new# this must have a corresponding veiws file to call from
     @portfolio_item = Portfolio.new
+    3.times {@portfolio_item.technologies.build}
   end
 
   def create
-    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body))#this is another method
+    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body, technologies_attributes: [:name]))#this is another method
 
     respond_to do |format|
       if @portfolio_item.save

@@ -394,7 +394,6 @@ implemented ternary operator and deviated from tutorial
 
 added to toggle_status
 
-<<<<<<< HEAD
 5.59 updating project management
 merging the branch
 creating a new pull request
@@ -458,13 +457,255 @@ have to pass in @thing = params[:thing] in the controller method you point the q
 
 passed the <h1><%= @thing  %></h1> to the veiws file and it is now showing the :thing extension
 
+6.64 Data Validations
+after the pull request on github, we must update local stuff with git pull
+create a new repository
+git checkout -b data-feature
+
+created example of empty blog post in rails c
+called upcase method on the views file and it threw an error
+go to models to implement validation
+
+validates_presence_of :title, :body
+##will not let a blog post item to be created without a title and a body
+
+updated all the models files
+
+6.65 data relationships in rails
+git symbolic-ref --short HEAD
+git checkout data-feature
+rails g model Topic title:string
+rails db:migrate
+validates_presence_of :title within the topic.rb model
+
+
+Example
+Blogs:
+title:Baseball wolrd series, topic_id: 1
+Superbowl, topic_id: 2
+Spring training, topic_id: 1
+
+Topics:
+1 baseball
+2 football
+
+######################################################
+
+rails g migration add_topic_referenece_to_blogs topic:references
+note in db migration file    foreign_key: true ===== not just a regiulatr integer value but it is referencing  another table
+
+addition to topic.rb 
+has_many :blogs
+
+addition to blogs.rb
+belongs_to :topic
+
+
+Topic.create!(title: "Ruby Programing")
+Topic.create!(title: "Software Engineering")
+
+Blog.create!(title: "Some cool ruby stuff", body: 'sadfgsadfsdf', topic_id: Topic.first.id)
+t = Topic.first
+
+t.blogs ###Active record association collection proxy
+Blog.last.topic
+
+
+6.66 custom scopes
+updating seeds file
+3.times do |topic|
+    Topic.create!(
+        title: "Topic #{topic}"
+        )
+end
+
+puts "3 Topics created"
+
+under body, lorem ipsum and after body created new object, topic_id: Topic.last.id
+
+rails db:setup
+Portfolio.first.subtitle
+Portfolio.where(subtitle: "Ruby on Rails")
+
+The lines at the beginning of a rails c query is sql  eg. SELECT  "portfolios".* FROM "portfolios" ORDER BY "portfolios"."id" DESC LIMIT $1
+
+example shown in the portfolio controller where he used the .where method to fitler index items
+
+
+
+****
+under portfolio model
+def self.angular
+    where(subtitle: 'Angular')
+  end
+
+example shown for index file with Portfolio.angular
+
+***
+scope keyword, uses a lambda
+scope :ruby_on_rails_portfolio_items, -> { where(subtitle: 'Ruby on Rails')}
+
+example shown for index file with Portfolio.ruby_on_rails_portfolio_items
+
+added new angular definition in controller
+created a veiws file for angular
+--altered to show @angular portfolio items
+implemented a route to the page
+get 'angular-items', to: portfolio_angular
+will now show at /angular-items
+
+
+6.67 set default values in rails 5
+in portfolio.rb
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.main_image ||= "http://via.placeholder.com/600x400"
+    self.thumb_image ||= "http://via.placeholder.com/350x200"
+  end
+
+
+used ||= because a regular = would over ride
+means if self.object == nil
+
+6.68 integrating concerns
+
+Whenever you have a functionality but doesn't belong in a model file or should be shared across a couple of different model files
+
+Can be abused
+
+Should deal with data
+
+#######################
+rails g migration add_badge_to_skills badge:text
+rails db:migrate
+
+updated the skill model file to have a default badge
+
+replacing the http://via.placeholder.com/250x250 with a concern
+created a file in concerns placeholder.rb
+added the module we created in placeholder.rb to the model file
+##include Placeholder
+
+#deviated from his def did not use key value syntax to see if it works
+self.badge ||= Placeholder.image_generator(250, 250)
+nope use 
+self.badge ||= Placeholder.image_generator(height: 250, width: 250)
+why must I use the the Hash syntax as an input? maybe you don't have to, but is as better practice because you cannot mess up the parameters that were put in
+
+
+Used a module instead of a class?
+--concerns are considered helper modules and it is Ruby best practice eg class would wourk but it is like UpperSnake case for classes
+
+
+What does the extend function do?
+ActiveSupport::Concern? meaning with Syntax
+
+
+
+
+6.69 additionalparent/child relationships
+
+rails g model Technology name:string portfolio:references
+
+Why in the schema file does the t.bigint "portfolio_id" show up
+--because the datatype is references ???
+changed the bigint to integer
+
+
+adds belongs_to :portfolio  to technology.rb when created
+see 6.65 for more info
+Still need to update the portfolio.rb file with has_many
+
+Technology.create!(name: "Rails", portfolio_id: Portfolio.last.id)
+
+added to seeds file:
+3.times do |tech|
+    Technology.create!(
+        name: "Technology #{tech}"
+        portfolio_id: Portfolio.last.id)
+end
+
+I kept this syntax bc it is more clear but alternatively
+
+3.times do |tech|
+    Portfolio.last.technologies.create!(
+        name: "Technology #{tech}")
+end
+
+6.70-71 configuring nested attributes in the model
+in poortfolio.rb
+accepts_nested_attributes_for :technologies, reject_if: lambda {|attrs| attrs['name'].blank?}
+create a single portfolio item and use multiple technologies
+
+
+in rails console for testing
+Portfolio.create!(title: "Web app", subtitle: "stuff", body: "body body body", technologies_attributes: [{name: "Ruby"},{name: "Rails"},{name: "Angular"},{name: "Ionic"}])
+
+the last part must be an array of hashes or set of key value pairs
+
+Within the portfolios controller def new
+    3.times {@portfolio_item.technologies.build}
+### note when using curly braces you do not need the do
+###instantiate 3 technologies
+
+under def create
+add the technologies_attributes: [:name] to the required params
+
+under new.html.erb
+take the block variable form
+ul is unordered list
+li is list item
+text feild is smaller than text area
+
+  <ul>
+    <%= form.fields_for :technologies do |technologiy_form| %>
+      <li>
+        <%= technologiy_form.label :name %>
+        <%= technology_form.text_field :name %>
+      </li>
+    <% end %>
+  </ul>
+
+
+added to show page
+<h2>Technologies Used:</h2>
+<% @portfolio_item.technologies.each do |t| %>
+<p><%= t.name%><p>
+<% end %>
 
 
 
 
 
-=======
->>>>>>> b682213d1c6711cad9adc89cbf884efa98e897bf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
