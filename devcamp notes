@@ -633,6 +633,20 @@ I kept this syntax bc it is more clear but alternatively
         name: "Technology #{tech}")
 end
 
+6.70-71 configuring nested attributes in the model
+in poortfolio.rb
+accepts_nested_attributes_for :technologies, reject_if: lambda {|attrs| attrs['name'].blank?}
+create a single portfolio item and use multiple technologies
+
+
+in rails console for testing
+Portfolio.create!(title: "Web app", subtitle: "stuff", body: "body body body", technologies_attributes: [{name: "Ruby"},{name: "Rails"},{name: "Angular"},{name: "Ionic"}])
+
+the last part must be an array of hashes or set of key value pairs
+
+
+
+
 
 
 
