@@ -604,6 +604,35 @@ ActiveSupport::Concern? meaning with Syntax
 
 
 
+6.69 additionalparent/child relationships
+
+rails g model Technology name:string portfolio:references
+
+Why in the schema file does the t.bigint "portfolio_id" show up
+--because the datatype is references ???
+changed the bigint to integer
+
+
+adds belongs_to :portfolio  to technology.rb when created
+see 6.65 for more info
+Still need to update the portfolio.rb file with has_many
+
+Technology.create!(name: "Rails", portfolio_id: Portfolio.last.id)
+
+added to seeds file:
+3.times do |tech|
+    Technology.create!(
+        name: "Technology #{tech}"
+        portfolio_id: Portfolio.last.id)
+end
+
+I kept this syntax bc it is more clear but alternatively
+
+3.times do |tech|
+    Portfolio.last.technologies.create!(
+        name: "Technology #{tech}")
+end
+
 
 
 

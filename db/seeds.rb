@@ -52,3 +52,12 @@ Nunc nec erat sem. Sed accumsan convallis orci eu sagittis. Pellentesque bibendu
     )
 end
 puts "9 portfolio items created"
+
+3.times do |tech|
+    Technology.create!(
+        name: "Technology #{tech}",
+        portfolio_id: Portfolio.last.id
+        )
+end
+
+puts "3 technologies created"
