@@ -644,6 +644,39 @@ Portfolio.create!(title: "Web app", subtitle: "stuff", body: "body body body", t
 
 the last part must be an array of hashes or set of key value pairs
 
+Within the portfolios controller def new
+    3.times {@portfolio_item.technologies.build}
+### note when using curly braces you do not need the do
+###instantiate 3 technologies
+
+under def create
+add the technologies_attributes: [:name] to the required params
+
+under new.html.erb
+take the block variable form
+ul is unordered list
+li is list item
+text feild is smaller than text area
+
+  <ul>
+    <%= form.fields_for :technologies do |technologiy_form| %>
+      <li>
+        <%= technologiy_form.label :name %>
+        <%= technology_form.text_field :name %>
+      </li>
+    <% end %>
+  </ul>
+
+
+added to show page
+<h2>Technologies Used:</h2>
+<% @portfolio_item.technologies.each do |t| %>
+<p><%= t.name%><p>
+<% end %>
+
+
+
+
 
 
 
