@@ -547,6 +547,72 @@ scope :ruby_on_rails_portfolio_items, -> { where(subtitle: 'Ruby on Rails')}
 
 example shown for index file with Portfolio.ruby_on_rails_portfolio_items
 
+added new angular definition in controller
+created a veiws file for angular
+--altered to show @angular portfolio items
+implemented a route to the page
+get 'angular-items', to: portfolio_angular
+will now show at /angular-items
+
+
+6.67 set default values in rails 5
+in portfolio.rb
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.main_image ||= "http://via.placeholder.com/600x400"
+    self.thumb_image ||= "http://via.placeholder.com/350x200"
+  end
+
+
+used ||= because a regular = would over ride
+means if self.object == nil
+
+6.68 integrating concerns
+
+Whenever you have a functionality but doesn't belong in a model file or should be shared across a couple of different model files
+
+Can be abused
+
+Should deal with data
+
+#######################
+rails g migration add_badge_to_skills badge:text
+rails db:migrate
+
+updated the skill model file to have a default badge
+
+replacing the http://via.placeholder.com/250x250 with a concern
+created a file in concerns placeholder.rb
+added the module we created in placeholder.rb to the model file
+##include Placeholder
+
+#deviated from his def did not use key value syntax to see if it works
+self.badge ||= Placeholder.image_generator(250, 250)
+nope use 
+self.badge ||= Placeholder.image_generator(height: 250, width: 250)
+why must I use the the Hash syntax as an input? maybe you don't have to, but is as better practice because you cannot mess up the parameters that were put in
+
+
+Used a module instead of a class?
+--concerns are considered helper modules and it is Ruby best practice eg class would wourk but it is like UpperSnake case for classes
+
+
+What does the extend function do?
+ActiveSupport::Concern? meaning with Syntax
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
