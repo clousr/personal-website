@@ -674,8 +674,18 @@ added to show page
 <p><%= t.name%><p>
 <% end %>
 
+6.72 sql active receord deep dive
+Class.find_by_sql(Select books.* From books)
+Book.where(title: "The Force")
+### brings an array of books
+Book.find_by_title("The Force").author
+##will bring a single item back
 
 
+has_many :genes, through: :books
+Genre.pluck(:name)
+Book.includes(:author, :genre)
+--much faster
 
 
 
