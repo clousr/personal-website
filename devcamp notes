@@ -743,7 +743,7 @@ devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout',
 in application.html.erb ### why application?
     <% link_to "Logout", path destroy_user_session_path, method: :delete %>
 
-7.79 Devise custom attributes
+7.80 Devise custom attributes
 Devise veiws
 new.html.erb
 edit.html.erb
@@ -768,6 +768,20 @@ added
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+
+7.81 Controller concerns in rails 5
+single responsiblity rule
+-class should have 1 resposibility
+
+moving whitelist to a concern
+created concern devise_white_list.rb
+module DeviseWhitelist
+#naming convension important when creating a module, must be the same as the file name and be UpperCammelCase.----only important in Rails parsing engine for easy module pass around
+
+added extend ActiveSupport::Concern
+put before action into included do
+??????
+
 
 
 
