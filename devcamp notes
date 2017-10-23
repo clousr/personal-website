@@ -737,8 +737,11 @@ Custom feild in migration file
 http://localhost:3000/users/sign_up
 
 7.78 custom routes for authentication pages
+devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
 
-
+7.79 logout
+in application.html.erb ### why application?
+    <% link_to "Logout", path destroy_user_session_path, method: :delete %>
 
 
 
