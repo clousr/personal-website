@@ -674,30 +674,134 @@ added to show page
 <p><%= t.name%><p>
 <% end %>
 
+6.72 sql active receord deep dive
+Class.find_by_sql(Select books.* From books)
+Book.where(title: "The Force")
+### brings an array of books
+Book.find_by_title("The Force").author
+##will bring a single item back
+
+
+has_many :genes, through: :books
+Genre.pluck(:name)
+Book.includes(:author, :genre)
+--much faster
+
+7.76 devise
+placing instructions in the gem file will install all gems with bundle install
+
+7.77 implement registrations and logins
+rails generate devise:install
+
+changing the mailer_sender
+
+1. Ensure you have defined default url options in your environments files.in config/environments/development.rb
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
+In production, :host should be set to the actual host of your application.
+
+
+Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
 
 
 
 
+  4. You can copy Devise views (for customization) to your app by running:
+
+       rails g devise:views
 
 
+rails generate devise MODEL
+###do not use MODEL
+eg rails generate devise User
+
+New route method devise_for :users
+
+new model file user.rb
+:database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+optionable :confirmable, :lockable, :timeoutable and :omniauthable
+-comfirmation link -lock a user out -timeout -3rd party logins eg facebook
+
+Custom feild in migration file
+
+  t.string :name
 
 
+http://localhost:3000/users/sign_up
+
+7.78 custom routes for authentication pages
+devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
+
+7.79 logout
+in application.html.erb ### why application?
+    <% link_to "Logout", path destroy_user_session_path, method: :delete %>
+
+7.80 Devise custom attributes
+Devise veiws
+new.html.erb
+edit.html.erb
+added f.label :name subsection to both files
+removed autofocus- where cursor automatically goes to
+email feild will give a validation for an appropriate email
+name must become a permitted parameter
+devise/user controller was not created
+
+application controller
+Top class for all controllers
+Placing devise whitelist here
+
+added
+  before_action :configure_permitted_parameters, if: :devise_controller?
+#filter is depricated changed to action
+# if statement needs :, figured out due to prior before action using : on only:
+
+#:configure_permitted_parameters not special, could be anything
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+7.81 Controller concerns in rails 5
+single responsiblity rule
+-class should have 1 resposibility
+
+moving whitelist to a concern
+created concern devise_white_list.rb
+module DeviseWhitelist
+#naming convension important when creating a module, must be the same as the file name and be UpperCammelCase.----only important in Rails parsing engine for easy module pass around
+
+added extend ActiveSupport::Concern
+put before action into included do
+??????
 
 
+7.82 virtual attributes
+in the user model
+new method
+.update!(name: "cher")
+current_user object available from devise
 
+  validates_presence_of :name
 
+  def first_name
+    self.name.split.first
+  end
 
+  def last_name
+    self.name.split.last
+  end
 
+in homepage
 
-
-
-
-
-
-
-
-
-
+<h1>Hello <%= current_user.first_name if current_user %></h1>
 
 
 
