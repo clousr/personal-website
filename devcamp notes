@@ -743,6 +743,32 @@ devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout',
 in application.html.erb ### why application?
     <% link_to "Logout", path destroy_user_session_path, method: :delete %>
 
+7.79 Devise custom attributes
+Devise veiws
+new.html.erb
+edit.html.erb
+added f.label :name subsection to both files
+removed autofocus- where cursor automatically goes to
+email feild will give a validation for an appropriate email
+name must become a permitted parameter
+devise/user controller was not created
+
+application controller
+Top class for all controllers
+Placing devise whitelist here
+
+added
+  before_action :configure_permitted_parameters, if: :devise_controller?
+#filter is depricated changed to action
+# if statement needs :, figured out due to prior before action using : on only:
+
+#:configure_permitted_parameters not special, could be anything
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
 
 
 
