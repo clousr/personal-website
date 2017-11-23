@@ -10,3 +10,8 @@
 <% @portfolio_item.technologies.each do |t| %>
 <p><%= t.name%><p>
 <% end %>
+
+<!––This is connected to Application controllers/concerns––>
+<%= session.inspect %>
+
+<% session[:source] %>
