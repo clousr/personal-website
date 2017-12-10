@@ -837,12 +837,17 @@ great for cart items since it is constant while browsing
 -- THIS IS NOT SECURE DO NOT PUT ANYTHING HERE THAT IS WORTH STEALING --
 
 8.87 moved to individual concern
-8.89 Working with strong parameters
+8.88 Working with strong parameters
 white listing is recomended
 
 under config/application.rb
 
 config.action_controller.permit_all_parameter = true
+
+8.89 null object pattern deep dive
+
+
+
 
 
 

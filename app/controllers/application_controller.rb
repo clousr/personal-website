@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base ## scope resolution modulat
 
 include DeviseWhitelist
 include SetSource 
+include CurrentUserConcern
 
 end
 
