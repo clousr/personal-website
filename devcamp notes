@@ -803,6 +803,52 @@ in homepage
 
 <h1>Hello <%= current_user.first_name if current_user %></h1>
 
+7.83 Bcrypt
+bcrypt and pry gems
+to open type pry in the terminal
+ require 'bcrypt'
+ssn = BCrypt::Password.create("5555555")
+[4] pry(main)> ssn
+=> "$2a$10$VpCQ0KHJdrE7nAOUNX6Zr.DNLd4jjXpvPTQUAY7UkZSjHTFQ..n8C"
+[5] pry(main)> ssn == "5555555"
+=> true
+
+
+secondary for faster encryption
+ssn = BCrypt::Password.create("5555555", cost: 4)
+BCrypt::Engine.generate_salt
+"$2a$10$sCWSKUhtCWPSFq4d/RBuCu"
+this is the staring point for our encryption
+
+8.86 Using Rails Sessions to Share Data Between Pages
+Portfolio controller inhereits from Application Controller
+query string
+?q=twitter
+?asdfasdf=twitter
+def set source created in Applications controller
+session inspect on show.html.erb
+
+Application layout file
+application.html.erb
+great for cart items since it is constant while browsing
+-- although impermenOance after leaving site?
+-- attached to users account?
+-- cookies?
+-- THIS IS NOT SECURE DO NOT PUT ANYTHING HERE THAT IS WORTH STEALING --
+
+8.87 moved to individual concern
+8.88 Working with strong parameters
+white listing is recomended
+
+under config/application.rb
+
+config.action_controller.permit_all_parameter = true
+
+8.89 null object pattern deep dive
+
+
+
+
 
 
 
