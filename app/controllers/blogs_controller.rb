@@ -15,6 +15,7 @@ class BlogsController < ApplicationController
   # GET /blogs/new
   def new
     @blog = Blog.new
+
   end
 
   def toggle_status
