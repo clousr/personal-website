@@ -853,7 +853,15 @@ application.html.erb
 head tag changes the tab name
 yield is where all the other sites load into
 
+9.94 secondary layout files
+stylesheet link tags
+removed all data from application.css
+require tree means requires all files, that is why it is removed
 
+within the blogscontroller
+ layout "blog"
+
+assets file change
 
 
 
