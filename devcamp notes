@@ -845,6 +845,14 @@ under config/application.rb
 config.action_controller.permit_all_parameter = true
 
 8.89 null object pattern deep dive
+if current_user is insecure
+impleneted concern for current user for guests
+
+9.92 master layouts file
+application.html.erb
+head tag changes the tab name
+yield is where all the other sites load into
+
 
 
 
