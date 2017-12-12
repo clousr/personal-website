@@ -863,7 +863,22 @@ within the blogscontroller
 
 assets file change
 
+9.95 partials 9.96 send data to partials
+_nav.html.erb
 
+<%= render "shared/nav", location: 'top' %>
+
+
+<div class="<%= loaction%>">
+this will set a css class
+
+
+under portfolios.css
+.top a { 
+color: red;
+}
+
+the a means it is a link, .top is just a class
 
 
 
