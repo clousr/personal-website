@@ -880,7 +880,23 @@ color: red;
 
 the a means it is a link, .top is just a class
 
+9.97guide to view helpers
 
+application helper
+  def sample_helper
+    "<p> My helper </p>".html_safe
+  end
+ome
+home.html.erb
+<hr> horizontal rule
+
+<%= sample_helper %>
+
+renders my helper on homepage
+html_safe removes the <p> tags
+
+purpose of view helper
+whenever you need conditional logic inside of views
 
 
 
