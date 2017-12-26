@@ -898,7 +898,11 @@ html_safe removes the <p> tags
 purpose of view helper
 whenever you need conditional logic inside of views
 
-
+9.98 content helper tag methods
+home.html.erb
+<%= content_tag :p, class: "my-special-class" do %>
+  Hi this is insitde a paragraph tag
+<%end %>
 
 
 

@@ -13,12 +13,12 @@ module ApplicationHelper
     end
   end
 
-
-    
-    # render "shared/nav", location: 'top'
-#
-#
-    # if session[:source]
-    #  Thanks for visiting me from session[:source]
-    # end
+  def source_helper #optional parameter of layout name that he wrote into his program
+    if session[:source]
+      greeting = "Thanks for visiting me from #{session[:source]}"
+      content_tag(:p,
+      greeting,
+      class: "source-greeting")
+    end
+  end
 end
