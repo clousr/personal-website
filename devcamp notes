@@ -904,6 +904,38 @@ home.html.erb
   Hi this is insitde a paragraph tag
 <%end %>
 
+dynamic html
+
+  def sample_helper
+    content_tag(:div, "My content", class: "my-class")
+  end
+
+9.99 rendering collections via partials
+removed from index and placed most into partial
+
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.body %></td>
+        <td><%= link_to blog.status, toggle_status_blog_path(blog) %></td>
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+replaced w render @blogs
+
+looks for a singular partial
+
+same w portfolio
+although looks for model/controller item
+this is manual collections
+actionview::missingtemplate
+
+<%= render partial: 'portfolio_item', collection: @portfolio_items %>
+
+
 
 
 
