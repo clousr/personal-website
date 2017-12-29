@@ -935,7 +935,23 @@ actionview::missingtemplate
 
 <%= render partial: 'portfolio_item', collection: @portfolio_items %>
 
+9.101 helpful actionview helper methods
+  <td><%= blog.created_at %> </td>
+in partial
+and 
+<th>Date</th> 
+in index
 
+distance_of_time_in_words(blog.created_at, Time.now) timenow can be anything
+
+<p><%= number_to_phone "5555555555"%></p>
+
+Others that are not implemented
+number_to_currency
+number to percent
+number with delimiter(adds comma's)
+
+actionview helpers
 
 
 
