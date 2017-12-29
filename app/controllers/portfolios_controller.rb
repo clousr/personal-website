@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  layout 'portfolio'
 
   #this is generally used when you want to list out a number of items
   def index

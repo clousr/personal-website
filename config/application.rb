@@ -22,7 +22,7 @@ module DevcampPortfolio
     config.load_defaults 5.1
 
 
-    config.action_controller.permit_all_parameters = true
+    #config.action_controller.permit_all_parameters = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -845,14 +845,113 @@ under config/application.rb
 config.action_controller.permit_all_parameter = true
 
 8.89 null object pattern deep dive
+if current_user is insecure
+impleneted concern for current user for guests
+
+9.92 master layouts file
+application.html.erb
+head tag changes the tab name
+yield is where all the other sites load into
+
+9.94 secondary layout files
+stylesheet link tags
+removed all data from application.css
+require tree means requires all files, that is why it is removed
+
+within the blogscontroller
+ layout "blog"
+
+assets file change
+
+9.95 partials 9.96 send data to partials
+_nav.html.erb
+
+<%= render "shared/nav", location: 'top' %>
 
 
+<div class="<%= loaction%>">
+this will set a css class
 
 
+under portfolios.css
+.top a { 
+color: red;
+}
 
+the a means it is a link, .top is just a class
 
+9.97guide to view helpers
 
+application helper
+  def sample_helper
+    "<p> My helper </p>".html_safe
+  end
+ome
+home.html.erb
+<hr> horizontal rule
 
+<%= sample_helper %>
+
+renders my helper on homepage
+html_safe removes the <p> tags
+
+purpose of view helper
+whenever you need conditional logic inside of views
+
+9.98 content helper tag methods
+home.html.erb
+<%= content_tag :p, class: "my-special-class" do %>
+  Hi this is insitde a paragraph tag
+<%end %>
+
+dynamic html
+
+  def sample_helper
+    content_tag(:div, "My content", class: "my-class")
+  end
+
+9.99 rendering collections via partials
+removed from index and placed most into partial
+
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.body %></td>
+        <td><%= link_to blog.status, toggle_status_blog_path(blog) %></td>
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+replaced w render @blogs
+
+looks for a singular partial
+
+same w portfolio
+although looks for model/controller item
+this is manual collections
+actionview::missingtemplate
+
+<%= render partial: 'portfolio_item', collection: @portfolio_items %>
+
+9.101 helpful actionview helper methods
+  <td><%= blog.created_at %> </td>
+in partial
+and 
+<th>Date</th> 
+in index
+
+distance_of_time_in_words(blog.created_at, Time.now) timenow can be anything
+
+<p><%= number_to_phone "5555555555"%></p>
+
+Others that are not implemented
+number_to_currency
+number to percent
+number with delimiter(adds comma's)
+
+actionview helpers
 
 
 
